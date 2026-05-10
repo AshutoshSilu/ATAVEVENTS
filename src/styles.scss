@@ -12,10 +12,15 @@
   scroll-behavior: smooth;
 }
 
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+body {
   background:
     radial-gradient(circle at top left, rgba(244, 63, 94, 0.18), transparent 28rem),
     radial-gradient(circle at top right, rgba(139, 92, 246, 0.2), transparent 24rem),
@@ -40,6 +45,7 @@ textarea {
 .section-shell {
   width: min(1120px, calc(100% - 2rem));
   margin-inline: auto;
+  padding: 0 1rem;
 }
 
 .gradient-text {
@@ -66,4 +72,51 @@ textarea {
 
 .animate-fade-up {
   animation: fade-up 0.75s ease both;
+}
+
+.delay-700 {
+  animation-delay: 700ms;
+}
+
+.delay-1000 {
+  animation-delay: 1000ms;
+}
+
+/* Header Styling */
+header {
+  width: 100%;
+  
+  nav {
+    width: 100%;
+  }
+  
+  a:first-child {
+    flex-wrap: nowrap;
+  }
+  
+  a:first-child > span:last-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.2;
+  }
+  
+  a:first-child > span:last-child > span {
+    display: block;
+    width: 100%;
+  }
+  
+  /* Mobile menu styling */
+  div[class*="absolute"] {
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+  
+  @media (max-width: 768px) {
+    div[class*="absolute"] {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+    }
+  }
 }
