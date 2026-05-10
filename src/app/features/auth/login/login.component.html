@@ -1,0 +1,37 @@
+<section class="relative min-h-[calc(100vh-5rem)] overflow-hidden py-14">
+  <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(139,92,246,0.24),transparent_28rem),radial-gradient(circle_at_80%_40%,rgba(244,63,94,0.2),transparent_30rem)]"></div>
+  <div class="section-shell grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+    <div class="glass-panel order-2 animate-fade-up rounded-[2rem] p-6 md:p-10 lg:order-1">
+      <div class="mb-8 text-center">
+        <span class="mx-auto grid h-16 w-16 place-items-center rounded-3xl bg-gradient-to-br from-violet-500 to-rose-500 text-2xl font-black shadow-xl shadow-violet-500/30">A</span>
+        <h1 class="mt-4 text-3xl font-black">Login to AtAv Events</h1>
+        <p class="mt-2 text-sm text-slate-400">Manage registrations, enquiries, and premium event plans.</p>
+      </div>
+
+      <form class="grid gap-5" [formGroup]="loginForm" (ngSubmit)="submit()">
+        <label class="grid gap-2 text-sm font-semibold">Email<input formControlName="email" class="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 outline-none transition focus:border-rose-300" placeholder="you@example.com"></label>
+        <label class="grid gap-2 text-sm font-semibold">Password<input type="password" formControlName="password" class="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 outline-none transition focus:border-rose-300" placeholder="Your password"></label>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 text-sm">
+          <label class="flex items-center gap-2 text-slate-300"><input type="checkbox" formControlName="rememberMe" class="h-4 w-4 accent-rose-500"> Remember Me</label>
+          <a href="mailto:support@atavevents.com?subject=Forgot%20Password" class="font-semibold text-rose-200 transition hover:text-white">Forgot Password?</a>
+        </div>
+
+        @if (message(); as alert) {
+          <p class="rounded-2xl px-4 py-3 text-sm" [ngClass]="alert.type === 'success' ? 'bg-emerald-500/15 text-emerald-100' : 'bg-rose-500/15 text-rose-100'">{{ alert.text }}</p>
+        }
+
+        <button type="submit" class="rounded-full bg-gradient-to-r from-rose-500 to-violet-500 px-7 py-4 font-black shadow-xl shadow-rose-500/25 transition hover:-translate-y-1 disabled:opacity-70" [disabled]="isSubmitting()">
+          @if (isSubmitting()) {<app-spinner label="Signing in..." />} @else { Login }
+        </button>
+      </form>
+    </div>
+
+    <div class="order-1 animate-fade-up lg:order-2" style="animation-delay: 120ms">
+      <p class="text-sm font-bold uppercase tracking-[0.35em] text-rose-300">Welcome Back</p>
+      <h2 class="mt-4 text-5xl font-black md:text-6xl">Your next celebration starts here.</h2>
+      <p class="mt-5 text-lg leading-8 text-slate-300">Access your event journey and connect with the AtAv planning team for updates, recommendations, and booking support.</p>
+      <a routerLink="/register" class="mt-8 inline-flex rounded-full border border-white/15 bg-white/10 px-6 py-3 font-bold transition hover:bg-white/15">Need an account? Register</a>
+    </div>
+  </div>
+</section>

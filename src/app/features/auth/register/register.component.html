@@ -1,0 +1,41 @@
+<section class="relative min-h-[calc(100vh-5rem)] overflow-hidden py-14">
+  <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_30%_20%,rgba(244,63,94,0.2),transparent_30rem),radial-gradient(circle_at_70%_50%,rgba(139,92,246,0.22),transparent_28rem)]"></div>
+  <div class="section-shell grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+    <div class="animate-fade-up">
+      <p class="text-sm font-bold uppercase tracking-[0.35em] text-rose-300">Register</p>
+      <h1 class="mt-4 text-5xl font-black md:text-6xl">Reserve your AtAv experience.</h1>
+      <p class="mt-5 text-lg leading-8 text-slate-300">Create your booking profile, select the event you love, and our concierge team will help with the next steps.</p>
+      <a routerLink="/login" class="mt-8 inline-flex rounded-full border border-white/15 bg-white/10 px-6 py-3 font-bold transition hover:bg-white/15">Already registered? Login</a>
+    </div>
+
+    <div class="glass-panel animate-fade-up rounded-[2rem] p-6 md:p-10" style="animation-delay: 120ms">
+      <div class="mb-7 text-center">
+        <span class="mx-auto grid h-16 w-16 place-items-center rounded-3xl bg-gradient-to-br from-rose-500 to-violet-500 text-2xl font-black shadow-xl shadow-rose-500/30">A</span>
+        <h2 class="mt-4 text-3xl font-black">Event Registration</h2>
+        <p class="mt-2 text-sm text-slate-400">Secure your spot in less than a minute.</p>
+      </div>
+
+      <form class="grid gap-5" [formGroup]="registerForm" (ngSubmit)="submit()">
+        <div class="grid gap-5 md:grid-cols-2">
+          <label class="grid gap-2 text-sm font-semibold">Full Name<input formControlName="fullName" class="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 outline-none transition focus:border-rose-300" placeholder="Full name"></label>
+          <label class="grid gap-2 text-sm font-semibold">Email<input formControlName="email" class="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 outline-none transition focus:border-rose-300" placeholder="you@example.com"></label>
+          <label class="grid gap-2 text-sm font-semibold">Phone Number<input formControlName="phone" class="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 outline-none transition focus:border-rose-300" placeholder="+91 99999 99999"></label>
+          <label class="grid gap-2 text-sm font-semibold">Event Selection<select formControlName="eventSelection" class="rounded-2xl border border-white/10 bg-slate-900 px-4 py-3 outline-none transition focus:border-rose-300"><option value="">Choose event</option>@for (event of eventOptions; track event) {<option [value]="event">{{ event }}</option>}</select></label>
+          <label class="grid gap-2 text-sm font-semibold">Password<input type="password" formControlName="password" class="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 outline-none transition focus:border-rose-300" placeholder="Minimum 8 characters"></label>
+          <label class="grid gap-2 text-sm font-semibold">Confirm Password<input type="password" formControlName="confirmPassword" class="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 outline-none transition focus:border-rose-300" placeholder="Repeat password"></label>
+        </div>
+
+        @if (registerForm.hasError('passwordsMismatch') && registerForm.touched) {
+          <p class="rounded-2xl bg-rose-500/15 px-4 py-3 text-sm text-rose-100">Passwords do not match.</p>
+        }
+        @if (message(); as alert) {
+          <p class="rounded-2xl px-4 py-3 text-sm" [ngClass]="alert.type === 'success' ? 'bg-emerald-500/15 text-emerald-100' : 'bg-rose-500/15 text-rose-100'">{{ alert.text }}</p>
+        }
+
+        <button type="submit" class="rounded-full bg-gradient-to-r from-rose-500 to-violet-500 px-7 py-4 font-black shadow-xl shadow-rose-500/25 transition hover:-translate-y-1 disabled:opacity-70" [disabled]="isSubmitting()">
+          @if (isSubmitting()) {<app-spinner label="Creating registration..." />} @else { Register Now }
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
